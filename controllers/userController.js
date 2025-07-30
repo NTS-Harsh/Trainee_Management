@@ -13,7 +13,7 @@ const generateToken = (id) => {
 // @access  Public
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password, department } = req.body;
+    const { name, email, password, department, gender } = req.body;
 
     // Check if user already exists
     const userExists = await User.findOne({ email });
@@ -29,6 +29,7 @@ const registerUser = async (req, res) => {
       email,
       password,
       department,
+      gender,
       role: 'trainee', // Default role is trainee
     });
 
@@ -38,6 +39,7 @@ const registerUser = async (req, res) => {
         name: user.name,
         email: user.email,
         department: user.department,
+        gender: user.gender,
         role: user.role,
         token: generateToken(user._id),
       });

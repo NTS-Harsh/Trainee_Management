@@ -36,7 +36,7 @@ const getTraineeById = async (req, res) => {
 // @access  Private/Admin
 const createTrainee = async (req, res) => {
   try {
-    const { name, email, password, department } = req.body;
+    const { name, email, password, department, gender } = req.body;
 
     // Check if user already exists
     const userExists = await User.findOne({ email });
@@ -52,6 +52,7 @@ const createTrainee = async (req, res) => {
       email,
       password,
       department,
+      gender,
       role: 'trainee',
     });
 
@@ -61,6 +62,7 @@ const createTrainee = async (req, res) => {
         name: trainee.name,
         email: trainee.email,
         department: trainee.department,
+        gender: trainee.gender,
         role: trainee.role,
       });
     } else {
@@ -83,6 +85,7 @@ const updateTrainee = async (req, res) => {
       // Update only the fields that are sent in the request
       trainee.name = req.body.name || trainee.name;
       trainee.department = req.body.department || trainee.department;
+      trainee.gender = req.body.gender || trainee.gender;
       
       // Only update email if it's provided
       if (req.body.email) {
@@ -107,6 +110,7 @@ const updateTrainee = async (req, res) => {
         name: updatedTrainee.name,
         email: updatedTrainee.email,
         department: updatedTrainee.department,
+        gender: updatedTrainee.gender,
         role: updatedTrainee.role,
       });
     } else {
