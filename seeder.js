@@ -22,6 +22,7 @@ const importData = async () => {
       email: 'ishathakur@admin.com',
       password: 'password123',
       department: 'Administration',
+      gender: 'female',
       role: 'admin',
     });
 
@@ -31,6 +32,7 @@ const importData = async () => {
       email: 'john@example.com',
       password: 'password123',
       department: 'IT',
+      gender: 'male',
       role: 'trainee',
     });
 
@@ -39,6 +41,7 @@ const importData = async () => {
       email: 'jane@example.com',
       password: 'password123',
       department: 'HR',
+      gender: 'female',
       role: 'trainee',
     });
 

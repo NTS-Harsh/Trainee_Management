@@ -69,6 +69,7 @@ const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
         department: user.department,
+        gender: user.gender,
         role: user.role,
         token: generateToken(user._id),
       });
@@ -95,6 +96,7 @@ const getUserProfile = async (req, res) => {
         name: user.name,
         email: user.email,
         department: user.department,
+        gender: user.gender,
         role: user.role,
       });
     } else {
@@ -118,6 +120,7 @@ const updateUserProfile = async (req, res) => {
       // Update only the fields that are sent in the request
       user.name = req.body.name || user.name;
       user.department = req.body.department || user.department;
+      user.gender = req.body.gender || user.gender;
       
       // Only update email if it's provided
       if (req.body.email) {
@@ -142,6 +145,7 @@ const updateUserProfile = async (req, res) => {
         name: updatedUser.name,
         email: updatedUser.email,
         department: updatedUser.department,
+        gender: updatedUser.gender,
         role: updatedUser.role,
         token: generateToken(updatedUser._id),
       });
@@ -159,7 +163,7 @@ const updateUserProfile = async (req, res) => {
 // @access  Private/Admin
 const createAdminUser = async (req, res) => {
   try {
-    const { name, email, password, department } = req.body;
+    const { name, email, password, department, gender } = req.body;
 
     // Check if user already exists
     const userExists = await User.findOne({ email });
@@ -175,6 +179,7 @@ const createAdminUser = async (req, res) => {
       email,
       password,
       department,
+      gender: gender || 'male', // Default to male if not provided
       role: 'admin',
     });
 
@@ -184,6 +189,7 @@ const createAdminUser = async (req, res) => {
         name: user.name,
         email: user.email,
         department: user.department,
+        gender: user.gender,
         role: user.role,
       });
     } else {
